@@ -8,6 +8,9 @@
   export let params = {};
 </script>
 
+<div class="absolute flex justify-center w-full">
+  <a class="font-thin text-5xl" href="/">Ukanlearn</a>
+</div>
 <Container class="min-h-screen flex flex-col justify-center items-center">
   <Navbar {currentRoute} />
   <Route {currentRoute} {params} />

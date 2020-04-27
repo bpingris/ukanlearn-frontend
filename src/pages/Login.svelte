@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { user } from "store/user";
   import { client } from "api/http";
-  import { Card, Input, Button, Toast, Col } from "UI";
+  import { Row, Card, Input, Button, Toast, Col } from "UI";
 
   export let currentRoute = "";
   export let params = "";
@@ -48,7 +48,7 @@
 <Toast active={toast} {theme} {message} on:close={close} />
 <Col col="12" sm="10" md="8" lg="6" xl="4">
   <form on:submit|preventDefault={login}>
-    <Card class="w-full">
+    <Card class="w-full z-10 relative">
       <div slot="title">Connexion</div>
       <div slot="subtitle">Entrez vos identifiants</div>
       <div slot="content">
@@ -63,3 +63,11 @@
     </Card>
   </form>
 </Col>
+
+<Row
+  class="bg-white shadow z-10 py-4
+  rounded-lg w-full sm:w-10/12 md:w-8/12 lg:w-1/2 xl:w-1/3">
+  <Col col="12" class="text-center">
+    <a class="hover:text-black text-gray-600 transition duration-100" href="/login">J'ai oublie mon mot de passe</a>
+  </Col>
+</Row>

@@ -51,7 +51,7 @@
 
 <Toast active={toast} {theme} {message} on:close={close} />
 <Col col="12" sm="10" md="8" lg="6" xl="4">
-  <Card class="w-full">
+  <Card class="w-full z-10 relative">
     <div slot="title">Inscription</div>
     <div slot="subtitle">Entrez vos identifiants</div>
     <div slot="content">

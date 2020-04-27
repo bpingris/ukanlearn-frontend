@@ -6,6 +6,4 @@
   export let params = {};
 </script>
 
-<Container>
-  <Route {currentRoute} {params} />
-</Container>
+<Route {currentRoute} {params} />

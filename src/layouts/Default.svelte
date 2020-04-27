@@ -4,9 +4,6 @@
 
   export let currentRoute;
   export let params = {};
-
-  console.log('??');
-  
 </script>
 
 <Container>
