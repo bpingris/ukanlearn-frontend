@@ -5,25 +5,34 @@
 
   export let currentRoute;
   export let params;
+  currentRoute;
+  params;
+
+  let toast = false;
+  let email = "";
+  let password = "";
+  let username = "";
+  let confirm = "";
+  let message = "";
+  let theme = "primary";
 
   async function signup() {
     toast = false;
     message = "";
     try {
-      const r = await client.post("/signup", {
+      await client.post("/signup", {
         email,
         password,
         confirm,
         username
       });
-      openToast("success", "You're account has been created");
+      openToast("success", "Votre compte a ete cree");
       navigateTo("login");
     } catch (error) {
-      let m = "";
       if (error.response.status === 400) {
-        m = error.response.data.message;
+        openToast("warning", error.response.data.message);
       } else {
-        m = error.response.data.error;
+        openToast("warning", error.response.data.error);
       }
       openToast("danger", m);
     }
@@ -38,13 +47,6 @@
   function close() {
     toast = false;
   }
-  let toast = false;
-  let email = "";
-  let password = "";
-  let username = "";
-  let confirm = "";
-  let message = "";
-  let theme = "primary";
 </script>
 
 <Toast active={toast} {theme} {message} on:close={close} />

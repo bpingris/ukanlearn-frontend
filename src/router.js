@@ -5,17 +5,9 @@ import DefaultLayout from "./layouts/Default.svelte";
 import AuthLayout from "./layouts/Auth.svelte";
 
 const routes = [
-  { name: "/", component: Home },
-  {
-    name: "login",
-    component: Login,
-    layout: AuthLayout,
-  },
-  {
-    name: "signup",
-    component: Signup,
-    layout: AuthLayout,
-  },
+  { name: "/", component: Home, layout: DefaultLayout },
+  { name: "login", component: Login, layout: AuthLayout },
+  { name: "signup", component: Signup, layout: AuthLayout },
 ];
 
 export { routes };

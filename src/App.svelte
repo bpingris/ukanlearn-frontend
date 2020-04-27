@@ -4,5 +4,7 @@
 </script>
 
 <div class="bg-gray-200">
-<Router {routes} />
+  <div class="z-10 relative">
+    <Router {routes} />
+  </div>
 </div>
