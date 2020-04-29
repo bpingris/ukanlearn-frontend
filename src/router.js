@@ -21,6 +21,7 @@ const guardLogged = { guard: isLogged, redirect: "/login" };
 
 const routes = [
   { name: "/", component: Home, layout: BlankLayout },
+  
   { name: "login", component: Login, layout: AuthLayout },
   { name: "signup", component: Signup, layout: AuthLayout },
   {
