@@ -1,7 +1,7 @@
 <script>
   import { navigateTo } from "svelte-router-spa";
   import { client } from "api/http";
-  import { Card, Input, Button, Toast, Col } from "UI";
+  import { Card, Input, Button, Toast, Col } from "@UI";
 
   export let currentRoute;
   export let params;

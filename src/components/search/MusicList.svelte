@@ -1,14 +1,21 @@
 <script>
-  import { Col, Row } from "UI";
+  import { Col, Row } from "@UI";
   import MusicItem from "./MusicItem.svelte";
   export let musics = null;
 </script>
 
+<style>
+  :global(.space-col > div) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+</style>
+
 <div class="mt-10">
   {#if musics}
-    <Row>
+    <Row class="flex-wrap space-col">
       {#each musics.data as music}
-        <Col sm="6" md="4" lg="3" class="mx-2">
+        <Col sm="6" md="4" lg="3">
           <MusicItem {music} />
         </Col>
       {/each}

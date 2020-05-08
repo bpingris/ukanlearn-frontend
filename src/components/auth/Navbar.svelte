@@ -1,6 +1,6 @@
 <script>
   import { Navigate } from "svelte-router-spa";
-  import { Button, Row, Col } from "UI";
+  import { Button, Row, Col } from "@UI";
   export let currentRoute;
 
   const linkActive = "text-black font-bold";

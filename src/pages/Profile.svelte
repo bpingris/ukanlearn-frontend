@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { Row, Col, Card, Label, Input, Button } from "UI";
+  import { Row, Col, Card, Label, Input, Button } from "@UI";
   import { user } from "store/user";
   import { client } from "api/http";
 
@@ -17,17 +17,17 @@
 </script>
 
 <style>
-  :global(.space-col-10 > div) {
-    padding-left: 5px;
-    padding-right: 5px;
+  :global(.space-col > div) {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 </style>
 
-<Row class="flex-1 justify-between items-centerd flex-wrap space-col-10">
+<Row class="flex-1 justify-between items-centerd flex-wrap space-col">
   <Col md="6">
     <Card class="mt-5">
       <div slot="title">Votre profil</div>
-      <div slot="subtitle">Ici, modifier votre profil</div>
+      <div slot="subtitle">Ici, modifiez votre profil</div>
       <img slot="content" class="mx-auto" src="./images/settings.svg" alt="" />
     </Card>
   </Col>
@@ -91,6 +91,14 @@
       </div>
       <div slot="actions">
         <Button>Exporter</Button>
+      </div>
+    </Card>
+  </Col>
+  <Col md="6">
+    <Card class="mt-5">
+      <div slot="title">Supprimer son compte</div>
+      <div slot="actions">
+        <Button theme="danger">Supprimer son compte</Button>
       </div>
     </Card>
   </Col>

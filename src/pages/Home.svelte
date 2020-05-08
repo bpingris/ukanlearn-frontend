@@ -1,6 +1,6 @@
 <script>
   import { Navigate } from "svelte-router-spa";
-  import { Card, Container, Row, Col, Button } from "UI";
+  import { Card, Container, Row, Col, Button } from "@UI";
   export let currentRoute = "";
   export let params = "";
   params;

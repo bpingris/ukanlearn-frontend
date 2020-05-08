@@ -1,5 +1,5 @@
 <script>
-  import { Card, Button } from "UI";
+  import { Card, Button } from "@UI";
   export let music;
 </script>
 

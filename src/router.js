@@ -6,6 +6,9 @@ import Signup from "./pages/Signup.svelte";
 import Search from "./pages/Search.svelte";
 import Profile from "./pages/Profile.svelte";
 import Create from "./pages/Create.svelte";
+import Editor from './pages/Editor.svelte';
+import Tune from './pages/Tune.svelte';
+
 import DefaultLayout from "./layouts/Default.svelte";
 import BlankLayout from "./layouts/Blank.svelte";
 import AuthLayout from "./layouts/Auth.svelte";
@@ -21,7 +24,7 @@ const guardLogged = { guard: isLogged, redirect: "/login" };
 
 const routes = [
   { name: "/", component: Home, layout: BlankLayout },
-  
+
   { name: "login", component: Login, layout: AuthLayout },
   { name: "signup", component: Signup, layout: AuthLayout },
   {
@@ -42,6 +45,18 @@ const routes = [
     layout: DefaultLayout,
     onlyIf: guardLogged,
   },
+  {
+    name: "editor",
+    component: Editor,
+    layout: DefaultLayout,
+    onlyIf: guardLogged
+  },
+  {
+    name: "tune",
+    component: Tune,
+    layout: DefaultLayout,
+    onlyIf: guardLogged
+  }
 ];
 
 export { routes };

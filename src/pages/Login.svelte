@@ -1,8 +1,9 @@
 <script>
+  import { fade } from "svelte/transition";
   import { navigateTo } from "svelte-router-spa";
   import { user } from "store/user";
   import { client } from "api/http";
-  import { Row, Card, Input, Button, Toast, Col } from "UI";
+  import { Row, Card, Input, Button, Toast, Col } from "@UI";
 
   export let currentRoute = "";
   export let params = "";

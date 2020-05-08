@@ -1,6 +1,7 @@
 <script>
+  
   import { Route, Navigate } from "svelte-router-spa";
-  import { Container } from "UI";
+  import { Container } from "@UI";
   import Waves from "../components/Waves.svelte";
   import Navbar from "../components/auth/Navbar.svelte";
 

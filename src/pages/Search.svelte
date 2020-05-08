@@ -1,7 +1,7 @@
 <script>
   import MusicList from "../components/search/MusicList.svelte";
   import { client } from "api/http";
-  import { Input, Row, Col } from "UI";
+  import { Input, Row, Col } from "@UI";
 
   export let currentRoute;
   export let params;
