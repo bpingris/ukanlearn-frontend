@@ -28,7 +28,7 @@
 
 <Modal canClose={false} bind:show>
   <Card>
-    <div slot="title">Une erreur est survenue</div>
+    <div slot="title">Une erreur est survenue :(</div>
     <div slot="subtitle">Il n'y pas de token ou il n'est pas valide !</div>
     <div slot="content">
       Nous ne pouvons pas activer votre compte sans token

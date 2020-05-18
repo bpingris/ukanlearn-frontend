@@ -34,8 +34,9 @@
       } else {
         error = err.response.data.error;
       }
+    } finally {
+      loading = false;
     }
-    loading = false;
   }
 </script>
 
