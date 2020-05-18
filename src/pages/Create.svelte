@@ -16,9 +16,7 @@
           l'aide des accords disponibles
         </div>
         <div slot="actions">
-          <Button>
-            <a href="/editor">Je cree ma musique</a>
-          </Button>
+          <Button to="/editor">Je cree ma musique</Button>
         </div>
       </Card>
     </Col>

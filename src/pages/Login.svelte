@@ -70,7 +70,7 @@
   <Col col="12" class="text-center">
     <a
       class="hover:text-black text-gray-600 transition duration-100"
-      href="/login">
+      href="/forgot_password">
       J'ai oublie mon mot de passe
     </a>
   </Col>

@@ -112,8 +112,8 @@
 
               </svg>
               <div class="z-10" slot="actions">
-                <Button>
-                  <a href="/signup">Inscription</a>
+                <Button to="/signup">
+                  Inscription
                 </Button>
               </div>
             </Card>
@@ -134,8 +134,8 @@
 
               </svg>
               <div class="z-10" slot="actions">
-                <Button>
-                  <a href="/login">Connexion</a>
+                <Button to="/login">
+                  Connexion
                 </Button>
               </div>
             </Card>

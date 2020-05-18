@@ -8,6 +8,8 @@ import Profile from "./pages/Profile.svelte";
 import Create from "./pages/Create.svelte";
 import Editor from './pages/Editor.svelte';
 import Tune from './pages/Tune.svelte';
+import ForgotPassword from './pages/ForgotPassword.svelte';
+import MailVerification from './pages/MailVerification.svelte';
 
 import DefaultLayout from "./layouts/Default.svelte";
 import BlankLayout from "./layouts/Blank.svelte";
@@ -27,6 +29,7 @@ const routes = [
 
   { name: "login", component: Login, layout: AuthLayout },
   { name: "signup", component: Signup, layout: AuthLayout },
+  { name: "forgot_password", component: ForgotPassword, layout: AuthLayout },
   {
     name: "search",
     component: Search,
@@ -56,6 +59,11 @@ const routes = [
     component: Tune,
     layout: DefaultLayout,
     onlyIf: guardLogged
+  },
+  {
+    name: "mail_verification/:token",
+    component: MailVerification,
+    layout: BlankLayout
   }
 ];
 
