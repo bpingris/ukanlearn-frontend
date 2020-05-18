@@ -14,6 +14,18 @@
   onMount(() => {
     me();
   });
+
+  async function exportData() {
+    const o = await client.get('/user/me/export')    
+    console.log(o)
+    const url = window.URL.createObjectURL(new Blob([JSON.stringify(o.data.data)], {type: 'application/json'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', o.data.filename);
+    document.body.appendChild(link);
+    link.click();
+    link.remove()
+  }
 </script>
 
 <style>
@@ -90,7 +102,7 @@
         </div>
       </div>
       <div slot="actions">
-        <Button>Exporter</Button>
+        <Button on:click={exportData}>Exporter</Button>
       </div>
     </Card>
   </Col>
