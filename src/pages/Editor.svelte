@@ -4,10 +4,12 @@
   import { get } from "svelte/store";
   import { client } from "api/http";
   import { editor } from "store/editor";
+  import { toasts } from "store/toasts";
   import { user } from "store/user";
   import { Loading, Card, Button, Row, Col } from "@UI";
   import ChordsList from "../components/editor/ChordsList.svelte";
   import Timeline from "../components/editor/Timeline.svelte";
+
   export let currentRoute;
   export let params;
   params;
@@ -24,9 +26,11 @@
     loading = true;
     try {
       //   await sleep(1000);
-      const { data } = await client.get("/chord");
-      chords = data;
-    } catch (error) {}
+      const { data } = await client.get("/chords");
+      chords = data.chords;
+    } catch (error) {
+      toasts.warning("Impossible de récupérer les accords");
+    }
     loading = false;
   }
 
@@ -34,18 +38,50 @@
     const $editor = get(editor);
     const $user = get(user);
     try {
-      await client.post("/music", {
+      await client.post("/musics", {
         name: $editor.musicName,
         chords: $editor.chords.map(o => o.name),
-        author: $user.username
+        author: $user.username,
+        instrument: $editor.instrument
       });
-      alert("Music added");
+      toasts.success("Musique sauvegardée avec succés");
     } catch (error) {
+      toasts.error("Une erreur est survenue");
+    }
+  }
+
+  let draftSave = null;
+  async function autoSaveDraft() {
+    console.log(draftSave);
+    if ($editor.chords.length == 0 && $editor.musicName.length <= 5) return;
+    try {
+      const r = await client.put("/users/me/drafts", {
+        id: draftSave ? draftSave._id : null,
+        name: $editor.musicName,
+        chords: $editor.chords.map(o => o.name),
+        instrument: $editor.instrument
+      });
+      draftSave = r.data.music;
+      toasts.success(
+        "Votre musique a ete sauvegarde dans vos brouillons",
+        5000
+      );
+    } catch (error) {
+      toasts.warning(
+        "Une erreur est survenue lors de la sauvegarde du brouillon"
+      );
       console.log(error);
     }
   }
 
-  onMount(fetchChords);
+  let intervalID = null;
+  onMount(() => {
+    fetchChords();
+    intervalID = setInterval(autoSaveDraft, 10000);
+  });
+  onDestroy(() => {
+    clearInterval(intervalID);
+  });
 </script>
 
 {#if loading}
@@ -55,7 +91,7 @@
         <Card>
           <div slot="content" class="text-center flex flex-col items-center">
             <Loading />
-            Recuperation des accords en cours...
+            Récuperation des accords en cours...
             <div />
           </div>
         </Card>

@@ -13,9 +13,13 @@
 
 <div class="mt-10">
   {#if musics}
+    {#if musics.data.musics.length === 0}
+      <div class="text-center text-xl">
+      Aucunes musiques trouvees</div>
+    {/if}
     <Row class="flex-wrap space-col">
-      {#each musics.data as music}
-        <Col sm="6" md="4" lg="3">
+      {#each musics.data.musics as music}
+        <Col col="12" sm="6" md="4" lg="3">
           <MusicItem {music} />
         </Col>
       {/each}

@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { Modal, Button, Input, Card } from "@UI";
   import { client } from "api/http";
+  import { toasts } from "store/toasts";
 
   export let currentRoute;
   export let params;
@@ -27,8 +28,8 @@
   async function savePassword() {
     loading = true;
     try {
-      await client.post(
-        `forgot_password/reset/${currentRoute.namedParams.token}`,
+      await client.patch(
+        `/auth/forgot_password/reset/${currentRoute.namedParams.token}`,
         {
           password,
           confirm
@@ -36,7 +37,7 @@
       );
       success = true;
     } catch (error) {
-      alert(
+      toasts.warning(
         error.response.data.error ||
           "Impossible de mettre a jour votre mot de passe"
       );

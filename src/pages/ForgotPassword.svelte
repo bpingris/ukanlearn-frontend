@@ -3,7 +3,6 @@
   import {
     Modal,
     TextError,
-    Toast,
     Col,
     Input,
     Button,
@@ -26,7 +25,7 @@
     loading = true;
     error = null;
     try {
-      await client.post("/forgot_password", { usernameOrEmail });
+      await client.post("/auth/forgot_password", { usernameOrEmail });
       show = true;
     } catch (err) {
       if (err.response.status === 400) {
@@ -69,7 +68,7 @@
         <Loading />
       </div>
     {/if}
-    <Card class="w-full z-10 relative">
+    <Card class="my-4 w-full z-10 relative">
       <div slot="title">J'ai oublie mon mot de passe</div>
       <div slot="subtitle">Entrez votre nom d'utilisateur ou votre email</div>
       <div slot="content">

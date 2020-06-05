@@ -55,7 +55,7 @@
   <div slot="content">
     <Row class="justify-center items-center">
       {#each strings as string}
-        <Col class="text-center" cols="1">
+        <Col class="text-center" col="1">
           <Button
             pill={selectedString === string.string}
             class="text-xl focus:outline-none {selectedString === string.string && 'font-bold shadow-xl'}"

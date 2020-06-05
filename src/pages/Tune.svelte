@@ -1,4 +1,5 @@
 <script>
+  import {onDestroy} from 'svelte'
   import { Microphone } from "utils/audio";
   import Ukulele from "../components/tuner/Ukulele.svelte";
   import Guitar from "../components/tuner/Guitar.svelte";
@@ -62,6 +63,7 @@
   }
   let isMicActive = false;
   let selected = "";
+  onDestroy(stop)
 </script>
 
 <div>

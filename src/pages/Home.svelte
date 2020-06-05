@@ -41,14 +41,14 @@
 
   <section class="bg-white p-8">
     <h2 class="text-3xl font-light">Creez vos propres musiques</h2>
-    <Row class="items-center">
-      <Col class="mx-2" col="8" sm="6">
+    <Row class="items-center" gap>
+      <Col col="8" sm="6">
         <p>
           Notre puissant moteur de recherche vous permet de chercher les
           musiques sur notre plateforme en un instant !
         </p>
       </Col>
-      <Col class="mx-2" col="4" sm="6">
+      <Col col="4" sm="6">
         <img src="./images/building_blocks.svg" alt="" />
 
       </Col>
@@ -59,11 +59,11 @@
     <h2 class="text-3xl font-light">
       Recherchez les creations des autres utilisateurs
     </h2>
-    <Row class="items-center">
-      <Col class="mx-2" col="4" sm="6">
+    <Row class="items-center" gap>
+      <Col col="4" sm="6">
         <img src="./images/contemplating.svg" alt="" />
       </Col>
-      <Col class="mx-2" col="8" sm="6">
+      <Col col="8" sm="6">
         <p>
           Notre puissant moteur de recherche vous permet de chercher les
           musiques sur notre plateforme en un instant !
@@ -76,14 +76,14 @@
     <h2 class="text-3xl font-light">
       Lancez-vous et entrainez-vous sur vos morceaux favoris
     </h2>
-    <Row class="items-center">
-      <Col class="mx-2" col="8" sm="6">
+    <Row class="items-center" gap>
+      <Col col="8" sm="6">
         <p>
           Notre puissant moteur de recherche vous permet de chercher les
           musiques sur notre plateforme en un instant !
         </p>
       </Col>
-      <Col class="mx-2" col="4" sm="6">
+      <Col col="4" sm="6">
         <img src="./images/having_fun.svg" alt="" />
       </Col>
     </Row>
@@ -95,8 +95,8 @@
     </h2>
     <Row class="justify-center">
       <Col col="12" sm="10" md="8">
-        <Row class="justify-center items-center mt-5">
-          <Col col="12" sm="6" class="mx-5">
+        <Row class="justify-center items-center mt-5" gap>
+          <Col col="12" sm="6">
             <Card class="relative">
               <div slot="title">Inscrivez-vous</div>
               <div slot="subtitle">C'est gratuit !</div>
@@ -118,7 +118,7 @@
               </div>
             </Card>
           </Col>
-          <Col col="12" sm="6" class="mx-5">
+          <Col col="12" sm="6">
             <Card class="relative">
               <div slot="title">Connectez-vous</div>
               <div slot="subtitle">C'est egalement gratuit !</div>

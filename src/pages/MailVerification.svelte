@@ -22,7 +22,7 @@
   });
 
   function activateAccount() {
-    activation = client.get(`/confirmation/${currentRoute.namedParams.token}`);
+    activation = client.get(`/auth/confirmation/${currentRoute.namedParams.token}`);
   }
 </script>
 

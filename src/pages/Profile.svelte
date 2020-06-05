@@ -1,30 +1,104 @@
 <script>
+  import { navigateTo } from "svelte-router-spa";
   import { onMount } from "svelte";
-  import { Row, Col, Card, Label, Input, Button } from "@UI";
+  import { Row, Col, Card, Label, Input, Button, Modal } from "@UI";
   import { user } from "store/user";
   import { client } from "api/http";
+  import { exclude } from "utils/exclude";
 
   let loading = false;
+  let updatePass = false;
+  let currentPassword = "";
+  let newPassword = "";
+  let confirmNewpassword = "";
+  let updateInfos = false;
+  let username = $user.username;
+  let email = $user.email;
+
+  $: {
+    if (!updateInfos) {
+      username = $user.username;
+      email = $user.email;
+    }
+  }
+
   async function me() {
     loading = true;
     await user.fetchMe();
     loading = false;
   }
 
-  onMount(() => {
-    me();
-  });
+  onMount(me);
 
   async function exportData() {
-    const o = await client.get('/user/me/export')    
-    console.log(o)
-    const url = window.URL.createObjectURL(new Blob([JSON.stringify(o.data.data)], {type: 'application/json'}));
-    const link = document.createElement('a');
+    const o = await client.get("/users/me/export");
+    console.log(o);
+    const url = window.URL.createObjectURL(
+      new Blob([JSON.stringify(o.data.data)], { type: "application/json" })
+    );
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', o.data.filename);
+    link.setAttribute("download", o.data.filename);
     document.body.appendChild(link);
     link.click();
-    link.remove()
+    link.remove();
+  }
+
+  let confirmationDelete = false;
+
+  async function deleteAccount() {
+    try {
+      await client.delete("/users/me");
+      user.reset();
+      navigateTo("/");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function saveNewPassword() {
+    try {
+      const {
+        data: { user: data }
+      } = await client.patch("/users/me/password", {
+        current: currentPassword,
+        new_password: newPassword,
+        confirm: confirmNewpassword
+      });
+      currentPassword = "";
+      newPassword = "";
+      confirmNewpassword = "";
+      updatePass = false;
+      user.update(v => ({
+        ...v,
+        ...exclude(data, ["_id", "created_at, updated_at", "password"]),
+        timestamps: {
+          created_at: data.created_at,
+          updated_at: data.updated_at
+        }
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function updateInformations() {
+    try {
+      const {
+        data: { user: d }
+      } = await client.patch("/users/me", { email, username });
+      user.update(v => ({
+        ...v,
+        username: d.username,
+        email: d.email,
+        timestamps: {
+          created_at: d.created_at,
+          updated_at: d.updated_at
+        }
+      }));
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 
@@ -35,63 +109,71 @@
   }
 </style>
 
-<Row class="flex-1 justify-between items-centerd flex-wrap space-col">
-  <Col md="6">
-    <Card class="mt-5">
+<Row class="flex-1 justify-between flex-wrap" gap>
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Votre profil</div>
       <div slot="subtitle">Ici, modifiez votre profil</div>
       <img slot="content" class="mx-auto" src="./images/settings.svg" alt="" />
     </Card>
   </Col>
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Mes informations</div>
-      <div slot="subtitle">bliblou</div>
-      <div slot="content">
+      <div slot="subtitle">&nbsp;</div>
+      <div slot="content" class="text-center">
         {#if loading}
           loading
         {:else}
-          <Label label="Nom d'utilisateur" />
-          <Input disabled value={$user.username} />
-          <Label label="Adresse mail" />
-          <Input disabled value={$user.email} />
-          <Label label="Role" />
-          <Input disabled value={$user.role} />
-          <Label label="Cree le" />
-          <Input disabled value={$user.timestamps.createdAt} />
-          <Label label="Mis a jour le" />
-          <Input disabled value={$user.timestamps.updatedAt} />
+          <div>
+            <Label label="Nom d'utilisateur" />
+            <Input disabled value={$user.username} />
+            <Label label="Adresse mail" />
+            <Input disabled value={$user.email} />
+            <Label label="Role" />
+            <Input disabled value={$user.role} />
+            <Label label="Cree le" />
+            <Input disabled value={$user.timestamps.created_at} />
+            <Label label="Mis a jour le" />
+            <Input disabled value={$user.timestamps.updated_at} />
+          </div>
         {/if}
+        <Button class="mt-10" on:click={() => (updateInfos = true)}>
+          Modifier mes informations
+        </Button>
+        <Button class="mt-10" on:click={() => (updatePass = true)}>
+          Modifier mon mot de passe
+        </Button>
       </div>
     </Card>
   </Col>
 
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Mon historique</div>
       <div slot="subtitle">Les musiques jouees</div>
       <div slot="content">VIDE</div>
     </Card>
   </Col>
 
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Mes brouillons</div>
       <div slot="subtitle">Les creations en cours</div>
       <div slot="content">VIDE</div>
     </Card>
   </Col>
 
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Mes musiques creees</div>
       <div slot="subtitle">Les musiques creees</div>
     </Card>
 
   </Col>
 
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Export</div>
       <div slot="subtitle">Exporter mes donnees</div>
       <div slot="content">
@@ -106,12 +188,72 @@
       </div>
     </Card>
   </Col>
-  <Col md="6">
-    <Card class="mt-5">
+  <Col md="6" col="12" class="my-2">
+    <Card class="h-full">
       <div slot="title">Supprimer son compte</div>
+      <div slot="subtitle">Cette action est irreversible</div>
+      <div slot="content">
+        Toutes ces donnees seront supprimees:
+        <ul>
+          <li>- Email</li>
+          <li>- Nom d'utilisateur</li>
+          <li>- Mot de passe</li>
+          <li>- Brouillons</li>
+          <li>- Musiques creees</li>
+        </ul>
+      </div>
       <div slot="actions">
-        <Button theme="danger">Supprimer son compte</Button>
+        <Button on:click={() => (confirmationDelete = true)} theme="danger">
+          Supprimer son compte
+        </Button>
       </div>
     </Card>
   </Col>
 </Row>
+
+<Modal bind:show={confirmationDelete}>
+  <Card>
+    <div slot="title">Etes-vous sur de vouloir supprimer votre compte ?</div>
+    <div slot="subtitle">Impossible de revenir en arriere</div>
+    <div slot="actions">
+      <Button theme="danger" on:click={deleteAccount}>
+        Oui, je veux supprimer mon compte
+      </Button>
+      <Button on:click={() => (confirmationDelete = false)}>Annuler</Button>
+    </div>
+  </Card>
+</Modal>
+
+<Modal bind:show={updatePass}>
+  <Card>
+    <div slot="title">Modifier mon mot de passe</div>
+    <form slot="content">
+      <Label label="Mot de passe actuel" />
+      <Input type="password" bind:value={currentPassword} />
+      <Label label="Nouveau mot de passe" />
+      <Input type="password" bind:value={newPassword} />
+      <Label label="Confirmer le mot de passe" />
+      <Input type="password" bind:value={confirmNewpassword} />
+    </form>
+    <div slot="actions" class="space-x-4">
+      <Button on:click={saveNewPassword}>Sauvegarder</Button>
+      <Button on:click={() => (updatePass = false)}>Annuler</Button>
+    </div>
+  </Card>
+</Modal>
+
+<Modal bind:show={updateInfos}>
+  <Card>
+    <div slot="title">Modifier mon mot de passe</div>
+    <form slot="content">
+      <Label label="Nom d'utilisateur" />
+      <Input bind:value={username} />
+      <Label label="Addresse mail" />
+      <Input type="email" bind:value={email} />
+    </form>
+    <div slot="actions" class="space-x-4">
+      <Button on:click={updateInformations}>Sauvegarder</Button>
+      <Button on:click={() => (updateInfos = false)}>Annuler</Button>
+    </div>
+  </Card>
+</Modal>

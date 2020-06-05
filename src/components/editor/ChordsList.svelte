@@ -20,16 +20,17 @@
       text: "Guitare"
     }
   ];
-  let instrument = "";
   let filteredChords = [];
   // ugly
   $: {
     if (!chords) filteredChords = [];
     else {
-      if (instrument === "") {
+      if ($editor.instrument === "") {
         filteredChords = chords;
       } else {
-        filteredChords = chords.filter(o => o.instrument === instrument);
+        filteredChords = chords.filter(
+          o => o.instrument === $editor.instrument
+        );
       }
     }
   }
@@ -42,9 +43,6 @@
 </script>
 
 <div class={classes}>
-  <Select {items} bind:value={instrument}>
-    <div slot="trigger">Trier par instrument</div>
-  </Select>
 
   {#if chords}
     {#each filteredChords as chord}

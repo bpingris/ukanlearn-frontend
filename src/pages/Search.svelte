@@ -1,7 +1,7 @@
 <script>
   import MusicList from "../components/search/MusicList.svelte";
   import { client } from "api/http";
-  import { Input, Row, Col } from "@UI";
+  import { Input, Row, Col, Toast } from "@UI";
 
   export let currentRoute;
   export let params;
@@ -11,7 +11,23 @@
   let musicName = "";
   let musics = null;
   function searchMusic() {
-    musics = client.get("/music");
+    musics = client.get("/musics");
+  }
+
+  async function d() {
+    await client.put("/users/me/draft", {
+      author: "bbeqweqwe",
+      chords: ["e", "r"],
+      name: "hihqweqwewqi",
+      instrument: "guitar"
+    });
+    client.put("/users/me/draft", {
+      author: "bbeqweqwe",
+      chords: ["e", "r"],
+      name: "hihqweqwewqi",
+      instrument: "guitar",
+      id: "ewq"
+    });
   }
 </script>
 
