@@ -37,11 +37,11 @@
     const o = await client.get("/users/me/export");
     console.log(o);
     const url = window.URL.createObjectURL(
-      new Blob([JSON.stringify(o.data.data)], { type: "application/json" })
+      new Blob([JSON.stringify(o.data.informations)], { type: "application/json" })
     );
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", o.data.filename);
+    link.setAttribute("download", "ukanlearn_export.json");
     document.body.appendChild(link);
     link.click();
     link.remove();
