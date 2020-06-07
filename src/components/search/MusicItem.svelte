@@ -5,7 +5,7 @@
   import { toasts } from "store/toasts";
   import { user } from "store/user";
   export let music;
-  import HearthFavourite from "../../components/HearthFavourite.svelte";
+  import HeartFavourite from "../../components/HeartFavourite.svelte";
 
   $: instrument = music.instrument === "ukulele" ? "Ukulele" : "Guitare";
 </script>
@@ -13,7 +13,7 @@
 <Card class="relative" thumbnail={music.thumbnail} thumbnailHeight="125">
   <div class="relative z-10 flex justify-between" slot="title">
     <div>{music.name}</div>
-    <HearthFavourite musicID={music._id} size={8} />
+    <HeartFavourite musicID={music._id} size={8} />
   </div>
   <div class="relative z-10" slot="subtitle">
     {instrument} |

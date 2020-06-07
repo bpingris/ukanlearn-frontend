@@ -9,6 +9,7 @@ import Create from "./pages/Create.svelte";
 import Editor from './pages/Editor.svelte';
 import Tune from './pages/Tune.svelte';
 import Player from './pages/Player.svelte'
+import Musics from './pages/Musics.svelte'
 
 import ForgotPassword from './pages/ForgotPassword.svelte';
 import MailVerification from './pages/MailVerification.svelte';
@@ -57,6 +58,7 @@ const routes = [
     layout: DefaultLayout,
     onlyIf: guardLogged
   },
+  { name: "musics", component: Musics, layout: DefaultLayout, onlyIf: guardLogged },
   {
     name: "player/:id",
     component: Player,

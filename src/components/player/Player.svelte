@@ -6,6 +6,8 @@
   import { instrument } from "utils/format";
   import Progress from "./Progress.svelte";
   import ChordProgress from "./ChordProgress.svelte";
+  import HeartFavourite from '../HeartFavourite.svelte';
+
   /*music = {
     chords: [{name: "Em", strings: [1,2,3]}],
     instrument: "ukulele",
@@ -62,6 +64,7 @@
 <div class="p-5 bg-white rounded shadow-md mt-5">
   <div class="flex justify-between">
     <div class="text-4xl font-thin">"{music.name}"</div>
+    <HeartFavourite musicID={music.id} />
   </div>
   <div class="text-lg">{instrument(music.instrument)}</div>
   <Row class="items-center h-56">

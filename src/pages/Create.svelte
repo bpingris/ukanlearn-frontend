@@ -31,7 +31,7 @@
           entrainez-vous avec !
         </div>
         <div slot="actions">
-          <Button>Parcourir</Button>
+          <Button to="/musics">Parcourir</Button>
         </div>
       </Card>
     </Col>
