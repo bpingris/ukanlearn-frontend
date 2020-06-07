@@ -1,7 +1,9 @@
 <script>
-  import { Col, Row, Button, Card } from "@UI";
+  import { Col, Row, Button, Card, Form } from "@UI";
   import ChordEditor from "../components/editor/Chord.svelte";
 </script>
+
+<!-- <Form /> -->
 
 <div class="mt-10">
   <Row gap class="justify-center">

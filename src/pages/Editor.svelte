@@ -15,6 +15,7 @@
   params;
   currentRoute;
 
+  let draftID = null;
   let chords = null;
   let loading = false;
 
@@ -25,7 +26,7 @@
   async function fetchChords() {
     loading = true;
     try {
-      //   await sleep(1000);
+      await sleep(250);
       const { data } = await client.get("/chords");
       chords = data.chords;
     } catch (error) {
@@ -34,54 +35,17 @@
     loading = false;
   }
 
-  async function save() {
-    const $editor = get(editor);
-    const $user = get(user);
-    try {
-      await client.post("/musics", {
-        name: $editor.musicName,
-        chords: $editor.chords.map(o => o.name),
-        author: $user.username,
-        instrument: $editor.instrument
-      });
-      toasts.success("Musique sauvegardée avec succés");
-    } catch (error) {
-      toasts.error("Une erreur est survenue");
+  async function saveDraft() {
+    const { error, data } = await editor.saveDraft(draftID);
+    console.log({ draftID });
+
+    if (data) {
+      draftID = data.music._id;
     }
   }
 
-  let draftSave = null;
-  async function autoSaveDraft() {
-    console.log(draftSave);
-    if ($editor.chords.length == 0 && $editor.musicName.length <= 5) return;
-    try {
-      const r = await client.put("/users/me/drafts", {
-        id: draftSave ? draftSave._id : null,
-        name: $editor.musicName,
-        chords: $editor.chords.map(o => o.name),
-        instrument: $editor.instrument
-      });
-      draftSave = r.data.music;
-      toasts.success(
-        "Votre musique a ete sauvegarde dans vos brouillons",
-        5000
-      );
-    } catch (error) {
-      toasts.warning(
-        "Une erreur est survenue lors de la sauvegarde du brouillon"
-      );
-      console.log(error);
-    }
-  }
-
-  let intervalID = null;
-  onMount(() => {
-    fetchChords();
-    intervalID = setInterval(autoSaveDraft, 10000);
-  });
-  onDestroy(() => {
-    clearInterval(intervalID);
-  });
+  onMount(fetchChords);
+  onDestroy(editor.reset);
 </script>
 
 {#if loading}
@@ -103,7 +67,8 @@
     <Timeline />
     <ChordsList {chords} />
   </div>
-  <Button class="fixed bottom-0 left-0 mb-5 ml-20" on:click={save}>
-    Sauvegarder
-  </Button>
+  <div class="fixed bottom-0 left-0 mb-5 ml-5 flex flex-col space-y-4">
+    <Button on:click={() => editor.save()}>Sauvegarder</Button>
+    <Button on:click={saveDraft}>Sauvegarder comme brouillon</Button>
+  </div>
 {/if}

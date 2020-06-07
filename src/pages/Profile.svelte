@@ -5,6 +5,9 @@
   import { user } from "store/user";
   import { client } from "api/http";
   import { exclude } from "utils/exclude";
+  import Drafts from "../components/profile/Drafts.svelte";
+  import Favourites from "../components/profile/Favourites.svelte";
+  import Musics from "../components/profile/Musics.svelte";
 
   let loading = false;
   let updatePass = false;
@@ -59,23 +62,23 @@
   async function saveNewPassword() {
     try {
       const {
-        data: { user: data }
+        data: { user: data },
       } = await client.patch("/users/me/password", {
         current: currentPassword,
         new_password: newPassword,
-        confirm: confirmNewpassword
+        confirm: confirmNewpassword,
       });
       currentPassword = "";
       newPassword = "";
       confirmNewpassword = "";
       updatePass = false;
-      user.update(v => ({
+      user.update((v) => ({
         ...v,
         ...exclude(data, ["_id", "created_at, updated_at", "password"]),
         timestamps: {
           created_at: data.created_at,
-          updated_at: data.updated_at
-        }
+          updated_at: data.updated_at,
+        },
       }));
     } catch (err) {
       console.error(err);
@@ -85,16 +88,16 @@
   async function updateInformations() {
     try {
       const {
-        data: { user: d }
+        data: { user: d },
       } = await client.patch("/users/me", { email, username });
-      user.update(v => ({
+      user.update((v) => ({
         ...v,
         username: d.username,
         email: d.email,
         timestamps: {
           created_at: d.created_at,
-          updated_at: d.updated_at
-        }
+          updated_at: d.updated_at,
+        },
       }));
     } catch (error) {
       console.error(error);
@@ -156,21 +159,11 @@
     </Card>
   </Col>
 
-  <Col md="6" col="12" class="my-2">
-    <Card class="h-full">
-      <div slot="title">Mes brouillons</div>
-      <div slot="subtitle">Les creations en cours</div>
-      <div slot="content">VIDE</div>
-    </Card>
-  </Col>
+  <Drafts />
 
-  <Col md="6" col="12" class="my-2">
-    <Card class="h-full">
-      <div slot="title">Mes musiques creees</div>
-      <div slot="subtitle">Les musiques creees</div>
-    </Card>
+  <Musics />
 
-  </Col>
+  <Favourites />
 
   <Col md="6" col="12" class="my-2">
     <Card class="h-full">

@@ -1,5 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
+
+  let className = "";
+  export { className as class };
+
   export let instrument = "ukulele";
   export let yGap = 25;
   export let xGap = 50;
@@ -102,8 +106,8 @@
   }
 
   .frete {
-      stroke-width: 1px;
-      stroke: #333
+    stroke-width: 1px;
+    stroke: #333;
   }
   .start-string {
     stroke-width: 5px;
@@ -111,7 +115,7 @@
   }
 </style>
 
-<svg {width} {height} use:mousemove use:mouseclick>
+<svg {width} {height} use:mousemove use:mouseclick class={className}>
   <line x1="0" y1="0" x2="0" y2={yGap * (stringNb + 1)} class="start-string" />
   {#each Array(stringNb) as _, i}
     <line
@@ -136,4 +140,3 @@
     <circle cx={previewX} cy={previewY} r={previewRadius} fill="#3339" />
   {/if}
 </svg>
-
