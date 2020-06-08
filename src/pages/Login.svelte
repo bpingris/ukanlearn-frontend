@@ -19,7 +19,8 @@
   async function login() {
     const error = await user.login(email, password);
     if (!error) {
-      toasts.primary("Vous etes connecte !", 5000);
+      user.fetchMe()
+      toasts.primary("Vous etes connecté !", 5000);
       navigateTo("/search");
     } else {
       if (error.response.status === 422) {
@@ -28,10 +29,11 @@
             .map(o => `${o[0]}: ${o[1]}<br>`)
             .toString()
             .replace(/,/g, ""),
-          theme: "warning"
+          theme: "warning",
+          timeout: 4000
         });
       } else {
-        toasts.warning(error.response.data.errors, 4000);
+        toasts.warning(error.response.data.errors.message, 4000);
       }
     }
   }
@@ -66,7 +68,7 @@
     <a
       class="hover:text-black text-gray-600 transition duration-100"
       href="/forgot_password">
-      J'ai oublie mon mot de passe
+      J'ai oublié mon mot de passe
     </a>
   </Col>
 </Row>

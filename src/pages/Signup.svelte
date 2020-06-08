@@ -24,7 +24,7 @@
         confirm,
         username,
       });
-      toasts.success("Votre compte a ete cree", 5000);
+      toasts.success("Votre compte a été créé, regardez vos mails", 5000);
       navigateTo("login");
     } catch (error) {
       if (error.response.status === 422) {

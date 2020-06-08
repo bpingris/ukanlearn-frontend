@@ -18,7 +18,7 @@
     {/if}
     <Row class="flex-wrap space-col">
       {#each musics as music}
-        <Col col="12" sm="6" md="4" lg="3">
+        <Col class="my-2" col="12" sm="6" md="4" lg="3">
           <MusicItem {music} />
         </Col>
       {/each}

@@ -22,7 +22,9 @@
   });
 
   function activateAccount() {
-    activation = client.get(`/auth/confirmation/${currentRoute.namedParams.token}`);
+    activation = client.get(
+      `/auth/confirmation/${currentRoute.namedParams.token}`
+    );
   }
 </script>
 
@@ -52,9 +54,9 @@
     {:then data}
       <Card>
         <div slot="title">Parfait !</div>
-        <div slot="subtitle">Votre compte a ete active !</div>
+        <div slot="subtitle">Votre compte a été activé !</div>
         <div slot="content">
-          Vous pouvez maintenant vous connecter a
+          Vous pouvez maintenant vous connecter à
           <strong>Ukanlearn</strong>
         </div>
         <div slot="actions">
@@ -75,7 +77,7 @@
           </div>
         </div>
         <div slot="actions">
-          <Button to="/signup">Creer un compte</Button>
+          <Button to="/signup">Créer un compte</Button>
         </div>
       </Card>
     {/await}

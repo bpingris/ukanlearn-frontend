@@ -69,7 +69,7 @@
       </div>
     {/if}
     <Card class="my-4 w-full z-10 relative">
-      <div slot="title">J'ai oublie mon mot de passe</div>
+      <div slot="title">J'ai oublié mon mot de passe</div>
       <div slot="subtitle">Entrez votre nom d'utilisateur ou votre email</div>
       <div slot="content">
         <div class="flex flex-col">
@@ -82,7 +82,7 @@
         </div>
       </div>
       <div slot="actions">
-        <Button type="submit">Reinitialiser mon mot de passe</Button>
+        <Button type="submit">Réinitialiser mon mot de passe</Button>
       </div>
     </Card>
   </form>
@@ -93,11 +93,9 @@
     <div slot="title">C'est bon !</div>
     <div slot="subtitle">Regardez vos mails</div>
     <div slot="content">
-      Un email a ete envoye au compte correspondant a "{usernameOrEmail}".
+      Un email a été envoyé au compte correspondant à "{usernameOrEmail}".
       <br />
-      Ce mail contient un lien pour reinitialiser votre mot de passe !
-      <br />
-      Attention il est valide 12h !
+      Ce mail contient un lien pour réinitialiser votre mot de passe !
     </div>
     <div slot="actions">
       <Button on:click={() => (show = false)}>Fermer</Button>

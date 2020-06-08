@@ -70,7 +70,7 @@
   <Card class="my-4">
     <div slot="title">Controles</div>
     <div slot="subtitle">
-      Activez le micro puis choisissez l'instrument a accorder
+      Activez le micro puis choisissez l'instrument à accorder
     </div>
     <div
       slot="content"
@@ -93,7 +93,7 @@
     {isMicActive}
     bind:selectedString={selected}
     {title}
-    subtitle="Selectionnez la coder a accorder"
+    subtitle="Sélectionnez la corde à accorder"
     {instrument}
     {strings} />
 </div>

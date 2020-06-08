@@ -38,7 +38,7 @@
 <Col md="6" col="12" class="my-2">
   <Card class="h-full">
     <div slot="title">Mes brouillons</div>
-    <div slot="subtitle">Les creations en cours</div>
+    <div slot="subtitle">Les créations en cours</div>
     <div slot="content">
       {#if loading}
         <Loading />
@@ -73,8 +73,8 @@
             <div>
               <div class="text-xl">{draft.name}</div>
               <div>{instrument(draft.instrument)}</div>
-              <div>Cree le: {date(draft.created_at)}</div>
-              <div>Mis a jour: {date(draft.updated_at)}</div>
+              <div>Crée le: {date(draft.created_at)}</div>
+              <div>Mis à jour: {date(draft.updated_at)}</div>
             </div>
             <div class="flex flex-col space-y-2">
               <Button to="/editor?id={draft._id}">Editer</Button>

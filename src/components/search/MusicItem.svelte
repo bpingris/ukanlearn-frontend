@@ -7,10 +7,11 @@
   export let music;
   import HeartFavourite from "../../components/HeartFavourite.svelte";
 
+$:console.log(music)
   $: instrument = music.instrument === "ukulele" ? "Ukulele" : "Guitare";
 </script>
 
-<Card class="relative" thumbnail={music.thumbnail} thumbnailHeight="125">
+<Card class="relative h-full" thumbnail={music.thumbnail} thumbnailHeight="125">
   <div class="relative z-10 flex justify-between" slot="title">
     <div>{music.name}</div>
     <HeartFavourite musicID={music._id} size={8} />

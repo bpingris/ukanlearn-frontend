@@ -19,7 +19,7 @@
 <section class="pt-16 h-screen container mx-auto px-5">
   <h1 class="text-6xl font-light">Ukanlearn</h1>
   <h2 class="text-3xl font-light">
-    Apprenez a jouer un instrument comme dans Guitar Hero
+    Apprenez à jouer un instrument comme dans Guitar Hero
   </h2>
   <img
     class="mx-auto"
@@ -40,12 +40,13 @@
 <Container class="shadow-lg mt-10">
 
   <section class="bg-white p-8">
-    <h2 class="text-3xl font-light">Creez vos propres musiques</h2>
+    <h2 class="text-3xl font-light">Créez vos propres musiques</h2>
     <Row class="items-center" gap>
       <Col col="8" sm="6">
         <p>
-          Notre puissant moteur de recherche vous permet de chercher les
-          musiques sur notre plateforme en un instant !
+          A l'aide de l'éditeur de
+          <b>Ukanlearn</b>
+          , vous pouvez créer vos musiques en sélectionnant les accords voulus !
         </p>
       </Col>
       <Col col="4" sm="6">
@@ -57,7 +58,7 @@
 
   <section class="bg-gray-100 p-8">
     <h2 class="text-3xl font-light">
-      Recherchez les creations des autres utilisateurs
+      Recherchez les créations des autres utilisateurs
     </h2>
     <Row class="items-center" gap>
       <Col col="4" sm="6">
@@ -79,8 +80,11 @@
     <Row class="items-center" gap>
       <Col col="8" sm="6">
         <p>
-          Notre puissant moteur de recherche vous permet de chercher les
-          musiques sur notre plateforme en un instant !
+          Créez, trouvez, puis entraînez-vous sur la musique de votre choix !
+        </p>
+        <p>
+          Le lecteur vous permet de mettre en pause, changez la vitesse de
+          lecture, et vous affiche de manière ludique votre musique
         </p>
       </Col>
       <Col col="4" sm="6">
@@ -112,16 +116,14 @@
 
               </svg>
               <div class="z-10" slot="actions">
-                <Button to="/signup">
-                  Inscription
-                </Button>
+                <Button to="/signup">Inscription</Button>
               </div>
             </Card>
           </Col>
           <Col col="12" sm="6">
             <Card class="relative">
               <div slot="title">Connectez-vous</div>
-              <div slot="subtitle">C'est egalement gratuit !</div>
+              <div slot="subtitle">C'est également gratuit !</div>
               <svg
                 class="bottom-0 left-0 absolute z-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -134,9 +136,7 @@
 
               </svg>
               <div class="z-10" slot="actions">
-                <Button to="/login">
-                  Connexion
-                </Button>
+                <Button to="/login">Connexion</Button>
               </div>
             </Card>
           </Col>
@@ -145,4 +145,3 @@
     </Row>
   </section>
 </Container>
-<footer>random footer content</footer>

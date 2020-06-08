@@ -40,8 +40,8 @@
    */
   function isInRange(n, p, t) {
     if (!n) return false;
-    const tmp = (n * p) / 100;
-    if (t >= n - tmp && t <= n + tmp) {
+    
+    if (t >= n - p && t <= n + p) {
       return true;
     }
     return false;

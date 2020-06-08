@@ -135,7 +135,7 @@
             <Input disabled value={$user.username} />
             <Label label="Adresse mail" />
             <Input disabled value={$user.email} />
-            <Label label="Role" />
+            <Label label="Rôle" />
             <Input disabled value={$user.role} />
             <Label label="Cree le" />
             <Input disabled value={$user.timestamps.created_at} />
@@ -180,17 +180,7 @@
   <Col md="6" col="12" class="my-2">
     <Card class="h-full">
       <div slot="title">Supprimer son compte</div>
-      <div slot="subtitle">Cette action est irreversible</div>
-      <div slot="content">
-        Toutes ces donnees seront supprimees:
-        <ul>
-          <li>- Email</li>
-          <li>- Nom d'utilisateur</li>
-          <li>- Mot de passe</li>
-          <li>- Brouillons</li>
-          <li>- Musiques creees</li>
-        </ul>
-      </div>
+      <div slot="subtitle">Cette action est irréversible</div>
       <div slot="actions">
         <Button on:click={() => (confirmationDelete = true)} theme="danger">
           Supprimer mon compte
@@ -233,7 +223,7 @@
 
 <Modal bind:show={updateInfos}>
   <Card>
-    <div slot="title">Modifier mon mot de passe</div>
+    <div slot="title">Modifier mon nom d'utilisateur ou adresse mail</div>
     <form slot="content">
       <Label label="Nom d'utilisateur" />
       <Input bind:value={username} />

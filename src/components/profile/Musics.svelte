@@ -14,7 +14,7 @@
       const { data } = await client.get("/musics/user/me");
       musics = data.musics;
     } catch (error) {
-      toasts.warning("Impossible de recuperer vos musiques");
+      toasts.warning("Impossible de récupérer vos musiques");
     }
   }
 
@@ -68,8 +68,8 @@
             <div>
               <div class="text-xl">{music.name}</div>
               <div>{instrument(music.instrument)}</div>
-              <div>Cree le: {date(music.created_at)}</div>
-              <div>Mis a jour: {date(music.updated_at)}</div>
+              <div>Crée le: {date(music.created_at)}</div>
+              <div>Mis à jour: {date(music.updated_at)}</div>
             </div>
             <div class="flex flex-col space-y-2">
               <Button to="/player/{music._id}">Jouer</Button>

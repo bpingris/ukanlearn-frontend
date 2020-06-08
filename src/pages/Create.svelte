@@ -9,12 +9,12 @@
   <Row gap class="justify-center">
     <Col col="12" md="6">
       <Card class="h-full">
-        <div slot="title">Creer votre musique</div>
+        <div slot="title">Céeez votre musique</div>
         <div slot="subtitle">
           Composez vous même les musiques que vous aimez
         </div>
         <div slot="content">
-          Utilisez l'editeur en ligne Ukanlearn pour créer votre musique à
+          Utilisez l'éditeur en ligne Ukanlearn pour créer votre musique à
           l'aide des accords disponibles
         </div>
         <div slot="actions">

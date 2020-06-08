@@ -40,7 +40,7 @@
 
 <Card class="mt-5">
   <div slot="title">Mes musiques</div>
-  <div slot="subtitle">Retrouvez les musiques que vous avez creees ici</div>
+  <div slot="subtitle">Retrouvez les musiques que vous avez créées ici</div>
   <div slot="content">
     {#if loading}
       <Loading />
@@ -53,8 +53,8 @@
               shadow-lg p-8">
               <div class="text-3xl font-thin">{music.name}</div>
               <div class="text-xl">{instrument(music.instrument)}</div>
-              <div class="text-xl">Cree le:{date(music.created_at)}</div>
-              <div class="text-xl">Mis a jour le:{date(music.updated_at)}</div>
+              <div class="text-xl">Créé le: {date(music.created_at)}</div>
+              <div class="text-xl">Mis à jour le: {date(music.updated_at)}</div>
               <div class="mt-4 flex space-x-4 justify-between">
                 <HeartFavourite musicID={music._id} />
                 <div>
@@ -75,14 +75,14 @@
       </Row>
     {:else}
       <div class="text-center">Vous n'avez pas de musiques</div>
-      <Button to="/editor">Creer une musique</Button>
+      <Button to="/editor">Créer une musique</Button>
     {/if}
   </div>
 </Card>
 
 <Modal bind:show>
   <Card>
-    <div slot="title">Etes vous sur de vouloir supprimer {selected.name} ?</div>
+    <div slot="title">Etes-vous sûr de vouloir supprimer {selected.name} ?</div>
     <div slot="subtitle">Impossible d'annuler cela</div>
     <div slot="actions">
       <Button

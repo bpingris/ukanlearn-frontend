@@ -97,6 +97,15 @@
   <Countdown on:over={start} />
 {/if}
 
+<div
+    on:click={() => navigateTo('/search')}
+    class="inline-block rounded bg-white mt-4 p-4 shadow cursor-pointer
+    hover:shadow-xl transition duration-150">
+    <div class="flex items-center">
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+      <span class="ml-2">Retourner aux recherches</span>
+    </div>
+  </div>
 {#if isDraft}
   <div
     on:click={goBackToEditor}
