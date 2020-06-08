@@ -22,20 +22,20 @@
         email,
         password,
         confirm,
-        username
+        username,
       });
-      toasts.success("Votre compte a ete cree");
+      toasts.success("Votre compte a ete cree", 5000);
       navigateTo("login");
     } catch (error) {
       if (error.response.status === 422) {
         toasts.warning(
           Object.entries(error.response.data.errors)
-            .map(o => `${o[0]}: ${o[1]}<br>`)
+            .map((o) => `${o[0]}: ${o[1]}<br>`)
             .toString()
             .replace(/,/g, "")
         );
       } else {
-        toasts.warning(error.response.data.message);
+        toasts.warning(error.response.data.errors.message, 5000);
       }
     }
   }
@@ -50,8 +50,12 @@
         <div class="flex flex-col">
           <Input bind:value={email} class="mb-5" label="Adresse mail" />
           <Input bind:value={username} class="mb-5" label="Nom d'utilisateur" />
-          <Input bind:value={password} class="mb-5" label="Mot de passe" />
-          <Input bind:value={confirm} label="Confimer" />
+          <Input
+            type="password"
+            bind:value={password}
+            class="mb-5"
+            label="Mot de passe" />
+          <Input type="password" bind:value={confirm} label="Confimer" />
         </div>
       </div>
       <div slot="actions">

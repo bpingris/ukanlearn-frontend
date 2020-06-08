@@ -19,7 +19,7 @@
   async function login() {
     const error = await user.login(email, password);
     if (!error) {
-      toasts.add("Vous etes connecte !");
+      toasts.primary("Vous etes connecte !", 5000);
       navigateTo("/search");
     } else {
       if (error.response.status === 422) {
@@ -31,7 +31,7 @@
           theme: "warning"
         });
       } else {
-        toasts.add("warning", error.response.data.errors);
+        toasts.warning(error.response.data.errors, 4000);
       }
     }
   }

@@ -67,7 +67,7 @@
 </script>
 
 <div>
-  <Card class="my-5">
+  <Card class="my-4">
     <div slot="title">Controles</div>
     <div slot="subtitle">
       Activez le micro puis choisissez l'instrument a accorder

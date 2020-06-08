@@ -1,4 +1,5 @@
 <script>
+  import { flip } from "svelte/animate";
   import { Input, Col, Row, Label, Select } from "@UI";
   import ChordEditor from "./Chord.svelte";
   import { user } from "store/user";
@@ -9,12 +10,12 @@
   $: items = [
     {
       value: "ukulele",
-      text: "Ukulele"
+      text: "Ukulele",
     },
     {
       value: "guitar",
-      text: "Guitare"
-    }
+      text: "Guitare",
+    },
   ];
 
   function removeChord(i) {
@@ -40,9 +41,15 @@
   <hr />
   <Row class="flex-wrap">
     {#each $editor.chords as c, i}
-      <Col md="4" on:click={() => removeChord(i)} class="cursor-pointer">
+      <Col
+        col="12"
+        sm="12"
+        md="4"
+        on:click={() => removeChord(i)}
+        class="cursor-pointer hover:shadow-xl transition-shadow duration-100
+        my-2">
         <ChordEditor points={c.strings} instrument={c.instrument} readOnly />
-        {c.name}
+        <div class="text-2xl font-bold">{c.name}</div>
       </Col>
     {/each}
   </Row>

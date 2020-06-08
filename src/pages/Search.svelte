@@ -11,7 +11,6 @@
   export let params;
   currentRoute;
   params;
-  $: console.log({ currentRoute }, { params });
 
   let musicName = "";
   let musics = null;

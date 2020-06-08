@@ -49,7 +49,7 @@
           </span>
           <button
             on:click={() => (show = true)}
-            class="py-3 px-4 cursor-pointer bg-blue-500 rounded-r text-white">
+            class="py-3 px-4 cursor-pointer bg-blue-500 rounded-r hover:bg-blue-600 text-white">
             Voir
           </button>
         </div>
@@ -77,7 +77,7 @@
               <div>Mis a jour: {date(draft.updated_at)}</div>
             </div>
             <div class="flex flex-col space-y-2">
-              <Button>Editer</Button>
+              <Button to="/editor?id={draft._id}">Editer</Button>
               <Button theme="danger" on:click={() => deleteDraft(draft)}>
                 Supprimer
               </Button>

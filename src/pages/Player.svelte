@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
   import { toasts } from "store/toasts";
   import { client } from "api/http";
   import { Loading } from "@UI";
@@ -15,7 +15,7 @@
     FETCHING_CHORDS: 1,
     ERROR_MUSIC: 2,
     ERROR_CHORDS: 3,
-    OK: 4
+    OK: 4,
   });
 
   // data
@@ -29,18 +29,18 @@
     instrument: "",
     name: "",
     id: "",
-    draft: false
+    draft: false,
   };
+  let isDraft =
+    currentRoute.queryParams.draft && currentRoute.queryParams.draft === "true";
 
   // methods
   async function fetchMusic() {
     try {
       const { data } = await client.get(`/musics/id/${id}`);
-      console.log({ data });
       music = data.music;
       loadChords();
     } catch (error) {
-      console.log({ error });
       status = Status.ERROR_MUSIC;
     }
   }
@@ -52,7 +52,7 @@
       try {
         const { data } = await client.post("/chords/details", {
           name: c,
-          instrument: music.instrument
+          instrument: music.instrument,
         });
         chords = chords
           ? { ...chords, [c]: data.chord.strings }
@@ -62,7 +62,6 @@
         toasts.warning("Impossible de recuperer les accords");
       }
     }
-    console.log(chords);
     status = Status.OK;
   }
 
@@ -74,7 +73,7 @@
         id: music._id,
         name: music.name,
         draft: music.draft,
-        chords: music.chords.map(o => ({ name: o, strings: chords[o] }))
+        chords: music.chords.map((o) => ({ name: o, strings: chords[o] })),
       };
     }
   }
@@ -99,7 +98,7 @@
 {:else if status === Status.FETCHING_CHORDS}
   Recuperation des accords en cours...
 {:else if status === Status.OK}
-  <Player music={musicPlayer} />
+  <Player music={musicPlayer} {isDraft} />
 {:else if status === Status.ERROR_MUSIC}
   Erreur lors de la recuperation de la musique
 {:else if status === Status.ERROR_CHORDS}

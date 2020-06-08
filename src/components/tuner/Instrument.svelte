@@ -65,7 +65,7 @@
         </Col>
       {/each}
     </Row>
-    <Row class="justify-center mt-10">
+    <Row class="justify-center mt-5">
       <img
         class="w-64"
         transition:fade={{ duration: 100 }}

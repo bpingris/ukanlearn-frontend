@@ -1,55 +1,64 @@
 <script>
   import { onMount } from "svelte";
-  import { Col, Card, Modal, Button, Loading } from "@UI";
+  import { Col, Card, Button, Modal, Loading } from "@UI";
   import { toasts } from "store/toasts";
+  import { user } from "store/user";
   import { client } from "api/http";
   import { date, instrument } from "utils/format";
 
-  let musics = null;
   let loading = false;
+  let musics = null;
   let show = false;
 
-  async function fetchMusics() {
+  async function fetchHistoric() {
+    loading = true;
     try {
-      const { data } = await client.get("/musics/user/me");
+      const { data } = await client.get("/users/me/historic");
       musics = data.musics;
     } catch (error) {
-      toasts.warning("Impossible de recuperer vos musiques");
+      toasts.warning(
+        "Impossible de recuperer votre historique de musiques",
+        5000
+      );
+    }
+    loading = false;
+  }
+
+  let playedTimes = {};
+
+  $: {
+    if (Array.isArray($user.historic)) {
+      playedTimes = {};
+      for (const music of $user.historic) {
+        playedTimes[music] = playedTimes[music] ? playedTimes[music] + 1 : 1;
+      }
     }
   }
 
-  async function deleteMusic(music) {
-    try {
-      await client.delete(`/musics/user/me/${music._id}`);
-      fetchMusics();
-    } catch (error) {
-      toasts.warning("Impossible de supprimer cette musique");
-    }
-  }
-
-  onMount(fetchMusics);
+  onMount(fetchHistoric);
 </script>
 
 <Col md="6" col="12" class="my-2">
   <Card class="h-full">
-    <div slot="title">Mes musiques créées</div>
-    <div slot="subtitle">Les musiques créées et en ligne</div>
+    <div slot="title">Mon historique</div>
+    <div slot="subtitle">Les musiques jouées</div>
     <div slot="content">
       {#if loading}
         <Loading />
       {:else if musics}
         <div class="flex justify-center">
           <span class="text-center p-3 border border-gray-500 rounded-l">
-            {musics.length} musique(s) !
+            {musics.length} musiques jouées !
           </span>
           <button
             on:click={() => (show = true)}
-            class="py-3 px-4 cursor-pointer bg-blue-500 hover:bg-blue-600 rounded-r text-white">
+            class="py-3 px-4 cursor-pointer bg-blue-500 rounded-r
+            hover:bg-blue-600 text-white">
             Voir
           </button>
         </div>
       {:else}
-        <span>Pas de musiques créées !</span>
+        <span>Vous n'avez toujours pas joué une musique !</span>
       {/if}
     </div>
   </Card>
@@ -57,7 +66,7 @@
 
 <Modal bind:show>
   <Card>
-    <div slot="title">Mes musiques créées</div>
+    <div slot="title">Mon historique</div>
     <div slot="content">
       {#if musics && musics.length > 0}
         {#each musics as music}
@@ -68,19 +77,13 @@
             <div>
               <div class="text-xl">{music.name}</div>
               <div>{instrument(music.instrument)}</div>
-              <div>Cree le: {date(music.created_at)}</div>
-              <div>Mis a jour: {date(music.updated_at)}</div>
+              <div>Jouée {playedTimes[music._id]} fois</div>
             </div>
-            <div class="flex flex-col space-y-2">
-              <Button to="/player/{music._id}">Jouer</Button>
-              <Button theme="danger" on:click={() => deleteMusic(music)}>
-                Supprimer
-              </Button>
-            </div>
+            <Button to="/player/{music._id}">Jouer</Button>
           </div>
         {/each}
       {:else}
-        <span class="text-center text-lg">Vous n'avez pas de créations</span>
+        <span class="text-center text-lg">Vous n'avez pas d'historique</span>
       {/if}
 
     </div>

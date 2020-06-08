@@ -47,7 +47,7 @@
           </span>
           <button
             on:click={() => (show = true)}
-            class="py-3 px-4 cursor-pointer bg-blue-500 rounded-r text-white">
+            class="py-3 px-4 cursor-pointer bg-blue-500 hover:bg-blue-600 rounded-r text-white">
             Voir
           </button>
         </div>

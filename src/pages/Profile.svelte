@@ -8,6 +8,7 @@
   import Drafts from "../components/profile/Drafts.svelte";
   import Favourites from "../components/profile/Favourites.svelte";
   import Musics from "../components/profile/Musics.svelte";
+  import Historic from "../components/profile/Historic.svelte";
 
   let loading = false;
   let updatePass = false;
@@ -35,9 +36,10 @@
 
   async function exportData() {
     const o = await client.get("/users/me/export");
-    console.log(o);
     const url = window.URL.createObjectURL(
-      new Blob([JSON.stringify(o.data.informations)], { type: "application/json" })
+      new Blob([JSON.stringify(o.data.informations)], {
+        type: "application/json",
+      })
     );
     const link = document.createElement("a");
     link.href = url;
@@ -151,13 +153,7 @@
     </Card>
   </Col>
 
-  <Col md="6" col="12" class="my-2">
-    <Card class="h-full">
-      <div slot="title">Mon historique</div>
-      <div slot="subtitle">Les musiques jouees</div>
-      <div slot="content">VIDE</div>
-    </Card>
-  </Col>
+  <Historic />
 
   <Drafts />
 
@@ -197,7 +193,7 @@
       </div>
       <div slot="actions">
         <Button on:click={() => (confirmationDelete = true)} theme="danger">
-          Supprimer son compte
+          Supprimer mon compte
         </Button>
       </div>
     </Card>
