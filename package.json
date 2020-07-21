@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "sirv-cli": "^0.4.4",
     "svelte-portal": "^0.1.0",
     "svelte-router-spa": "^5.5.0",
